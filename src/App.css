@@ -1,5 +1,12 @@
 .App {
-  text-align: center;
+  padding: 20px;
+}
+
+.p-pointer {
+  cursor: pointer;
+}
+.p-done {
+  text-decoration: line-through;
 }
 
 .App-logo {

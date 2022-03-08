@@ -1,0 +1,37 @@
+
+  
+## object
+  const dataObject = {
+    id: "1",
+    name: "Ahmad",
+    class: "3",
+    school: {
+      name: "smk",
+      address: "jakarta",
+    },
+  };
+
+
+## optional chaining
+  console.log(dataObject && dataObject.address && dataObject.address.province);
+  console.log(dataObject?.address?.province);
+
+## statement classic if
+  if (dataObject.id === "1") {
+    console.log("berhasil");
+  }
+  // statement classic if else
+  if (dataObject.id === "2") {
+    console.log("berhasil");
+  } else if (dataObject.id === "3") {
+    console.log("gagal");
+  }
+
+## ternary if
+  dataObject.id === "1" && console.log("berhasil ternary");
+  // ternary if else
+  dataObject.id === "2"
+    ? console.log("berhasil ternary")
+    : dataObject.id === "3"
+    ? console.log("gagal ternary")
+    : console.log("masuk");
