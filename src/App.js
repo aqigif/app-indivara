@@ -1,21 +1,12 @@
 import "./App.css";
 import { useState } from "react";
-const todos = [
-  {
-    id: 1,
-    name: "belajar react",
-    isDone: false,
-  },
-  {
-    id: 2,
-    name: "menguasai react",
-    isDone: false,
-  },
-];
+import ListItem from "./components/list-item";
+import FooterAction from "./components/footer-action";
+import { todos } from "./constants/dummy";
+
 
 function App() {
   const [todoState, setTodoState] = useState(todos);
-  // const [todoData, setTodoData] = useState(null);
   const [todoIndex, setTodoIndex] = useState(null);
   const [value, setValue] = useState("");
 
@@ -46,10 +37,10 @@ function App() {
     setTodoState(newTodos);
   };
 
-  const handleGet = ({item, index}) => {
+  const handleGet = ({ item, index }) => {
     // setTodoData(item)
-    setTodoIndex(index)
-    setValue(item.name)
+    setTodoIndex(index);
+    setValue(item.name);
   };
   const handleUpdate = () => {
     // let index = todoState.findIndex((itm, idx) => itm.id === todoData.id);
@@ -60,48 +51,31 @@ function App() {
     };
     setTodoState(newTodos);
     // setTodoData(null)
-    setTodoIndex(null)
-    setValue("")
-  }
+    setTodoIndex(null);
+    setValue("");
+  };
 
   return (
     <div className="App">
       <h1>todo list</h1>
       {todoState.map((item, index) => {
-        console.log(item.isDone)
         return (
-          <span key={index} style={{ display: "flex", alignItems: "center" }}>
-            <p
-              onClick={() => {
-                handleDone(index);
-              }}
-              className={`p-pointer ${item.isDone ? "p-done" : ""}`}
-            >
-              {item.name}
-            </p>
-            <span
-              style={{ marginLeft: 10, cursor: "pointer", color: "red" }}
-              onClick={() => {
-                handleRemove(item);
-              }}
-            >
-              x
-            </span>
-            <span
-              style={{ marginLeft: 10, cursor: "pointer", color: "blue" }}
-              onClick={() => handleGet({item, index})}
-            >
-              edit
-            </span>
-          </span>
+          <ListItem
+            item={item}
+            index={index}
+            handleDone={handleDone}
+            handleRemove={handleRemove}
+            handleGet={handleGet}
+          />
         );
       })}
-      <input value={value} onChange={(e) => setValue(e.target.value)} />
-      {todoIndex === null ? (
-        <button onClick={handleAdd}>add</button>
-      ) : (
-        <button onClick={handleUpdate}>update</button>
-      )}
+      <FooterAction
+        value={value}
+        setValue={setValue}
+        todoIndex={todoIndex}
+        handleAdd={handleAdd}
+        handleUpdate={handleUpdate}
+      />
     </div>
   );
 }
