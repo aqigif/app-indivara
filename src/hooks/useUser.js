@@ -1,13 +1,13 @@
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
   useReducer,
   useState,
+  useEffect
 } from "react";
 import { getUsers } from "../services/axios";
- // state management
- // persistent data
+
 const useUser = () => {
   const [users, setUsers] = useState([]);
   const dispatch = useUsersUpdater();
@@ -81,7 +81,7 @@ export const StateProviders = ({ children }) => {
       cart: ""
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     const data = localStorage.getItem("persistData")
     if (data) {
       dispatch({type: "PERSIST", data: JSON.parse(data)})
