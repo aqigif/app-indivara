@@ -3,8 +3,7 @@ import {
   useContext,
   useEffect,
   useReducer,
-  useState,
-  useEffect
+  useState
 } from "react";
 import { getUsers } from "../services/axios";
 
