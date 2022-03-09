@@ -1,6 +1,6 @@
 function ListItem({ index, item, handleDone, handleGet, handleRemove }) {
   return (
-    <span key={index} style={{ display: "flex", alignItems: "center" }}>
+    <span key={index} style={styles.container}>
       <p
         onClick={() => {
           handleDone(index);
@@ -25,6 +25,10 @@ function ListItem({ index, item, handleDone, handleGet, handleRemove }) {
       </span>
     </span>
   );
+}
+
+export const styles = {
+    container: { display: "flex", alignItems: "center" }
 }
 
 export default ListItem;
