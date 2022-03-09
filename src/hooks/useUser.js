@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   useContext,
   useEffect,
@@ -6,7 +6,8 @@ import {
   useState,
 } from "react";
 import { getUsers } from "../services/axios";
-
+ // state management
+ // persistent data
 const useUser = () => {
   const [users, setUsers] = useState([]);
   const dispatch = useUsersUpdater();
@@ -32,8 +33,7 @@ const useUser = () => {
 
 const UsersStateContext = createContext();
 const UsersUpdaterContext = createContext();
-
-const reducer = (state, action) => {
+const switcer = (state, action) => {
   switch (action.type) {
     case "USERS":
       return {
@@ -58,9 +58,20 @@ const reducer = (state, action) => {
             ...state,
             cart: action.data,
         };
+    case "PERSIST":
+        return {
+            ...state,
+            ...action.data
+        };
     default:
       return state;
   }
+}
+const reducer = (state, action) => {
+  const data = switcer(state, action);
+  const persistData = {peoples: data.peoples}
+  localStorage.setItem("persistData", JSON.stringify(persistData))
+  return data
 };
 export const StateProviders = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -69,7 +80,14 @@ export const StateProviders = ({ children }) => {
       roles: [],
       cart: ""
   });
-  console.log(state)
+
+  React.useEffect(() => {
+    const data = localStorage.getItem("persistData")
+    if (data) {
+      dispatch({type: "PERSIST", data: JSON.parse(data)})
+    } 
+  }, [])
+
   return (
     <UsersStateContext.Provider value={state}>
       <UsersUpdaterContext.Provider value={dispatch}>
