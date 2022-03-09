@@ -1,18 +1,19 @@
-import useUser from "../hooks/useUser";
+import { useUsersState } from "../hooks/useUser";
 
 function Peoples() {
-  const { users, setUsers } = useUser();
+  const state = useUsersState()
+  const {peoples} = state
+
   return (
     <div className="App">
       <h1>peoples</h1>
-      {Array.from(users || []).map((item, index) => {
+      {Array.from(peoples || []).map((item, index) => {
         return (
           <p key={item.id}>
             {item?.first_name} {item?.last_name}
           </p>
         );
       })}
-      <button onClick={() => setUsers([])}>Clear</button>
     </div>
   );
 }
