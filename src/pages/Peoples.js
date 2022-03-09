@@ -1,6 +1,7 @@
+import useUser from "../hooks/useUser";
 
-
-function Peoples({ users }) {
+function Peoples() {
+  const { users, setUsers } = useUser();
   return (
     <div className="App">
       <h1>peoples</h1>
@@ -11,6 +12,7 @@ function Peoples({ users }) {
           </p>
         );
       })}
+      <button onClick={() => setUsers([])}>Clear</button>
     </div>
   );
 }
