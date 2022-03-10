@@ -2,16 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { StateProviders } from "./hooks/useUser";
+import { StateProvider } from "./hooks/useSM";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <StateProviders>
+      <StateProvider>
         <App />
-      </StateProviders>
+      </StateProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

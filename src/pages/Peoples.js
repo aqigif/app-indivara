@@ -1,7 +1,7 @@
-import { useUsersState } from "../hooks/useUser";
+import { useSMState } from "../hooks/useSM";
 
 function Peoples() {
-  const state = useUsersState()
+  const state = useSMState()
   const {peoples} = state
 
   return (
