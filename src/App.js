@@ -7,6 +7,7 @@ import Users from "./pages/Users";
 import Pokemons from "./pages/Pokemons/Pokemons";
 import PokemonId from "./pages/Pokemons/PokemonId";
 import PokemonsCart from "./pages/Pokemons/PokemonsCart";
+import Login from "./pages/Login";
 import Header from "./components/header";
 import { Container } from "@mui/material";
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="pokemons" element={<Pokemons />} />
         <Route path="pokemons/:id" element={<PokemonId />} />
         <Route path="pokemons/cart" element={<PokemonsCart />} />
+        <Route path="login" element={<Login />} />
       </Routes>
     </Container>
   );

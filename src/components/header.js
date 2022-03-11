@@ -4,9 +4,11 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 function Header(props) {
   const { sections, title } = props;
+  const { doLogout } = useAuth();
 
   return (
     <React.Fragment>
@@ -23,12 +25,37 @@ function Header(props) {
           {title}
         </Typography>
         {sections.map((section) => (
-          <Link to={section.url} key={section.title} style={{textDecoration: "none"}}>
-            <MLink noWrap variant="body2" sx={{ p: 1, flexShrink: 0,textDecoration: "none", color: "black"}}>
+          <Link
+            to={section.url}
+            key={section.title}
+            style={{ textDecoration: "none" }}
+          >
+            <MLink
+              noWrap
+              variant="body2"
+              sx={{
+                p: 1,
+                flexShrink: 0,
+                textDecoration: "none",
+                color: "black",
+              }}
+            >
               {section.title}
             </MLink>
           </Link>
         ))}
+        <MLink
+          onClick={doLogout}
+          sx={{
+            p: 1,
+            cursor: "pointer",
+            flexShrink: 0,
+            textDecoration: "none",
+            color: "black",
+          }}
+        >
+          Logout
+        </MLink>
       </Toolbar>
     </React.Fragment>
   );

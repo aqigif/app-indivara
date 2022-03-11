@@ -1,11 +1,14 @@
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Card, IconButton, Typography } from "@mui/material";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import usePokemon from "../../hooks/usePokemon";
 
 function Pokemons() {
   const navigate = useNavigate();
   const { pokemonCarts, deletePokemonFromCart } = usePokemon();
+  useAuth("protected");
 
   return (
     <div className="App">
@@ -33,17 +36,17 @@ function Pokemons() {
                 alt="span"
                 style={{ height: 200 }}
               />
-              <Typography variant="h6" gutterBottom >
+              <Typography variant="h6" gutterBottom>
                 {item?.name}
               </Typography>
-              <div style={{display: 'flex', justifyContent:"space-between"}}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div />
                 <IconButton
                   size="small"
-                  style={{ backgroundColor: "#fd1d1d", color: 'white' }}
+                  style={{ backgroundColor: "#fd1d1d", color: "white" }}
                   onClick={(e) => {
-                    e.preventDefault()
-                    deletePokemonFromCart(index)
+                    e.preventDefault();
+                    deletePokemonFromCart(index);
                   }}
                 >
                   <RemoveIcon />
