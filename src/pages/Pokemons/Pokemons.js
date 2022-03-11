@@ -68,7 +68,7 @@ function Pokemons() {
                 style={{ backgroundColor: "blue", color: 'white' }}
                 onClick={(e) => {
                   e.preventDefault()
-                  addPokemonToCart(index)
+                  addPokemonToCart(item)
                 }}
               >
                 <AddIcon />
