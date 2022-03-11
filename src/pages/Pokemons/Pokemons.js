@@ -1,9 +1,10 @@
 import { Card, IconButton, Typography } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import usePokemon from "../../hooks/usePokemon";
 import { getPokemonByName, getPokemons } from "../../services/axios";
+import PokemonCard from "../../components/cards";
 
 function Pokemons() {
   const { addPokemonToCart } = usePokemon();
@@ -44,48 +45,14 @@ function Pokemons() {
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {Array.from(pokemonData || []).map((item, index) => {
           return (
-            <Card
-              style={{
-                margin: 14,
-                marginLeft: 0,
-                marginRight: 28,
-                marginBottom: 30,
-                background: "white",
-                padding: 10,
-                borderRadius: 10,
-                cursor: "pointer",
-              }}
-            >
-              <img
-                onClick={() =>
-                  navigate(`/pokemons/${item.id}?name=${item.name}`)
-                }
-                src={item?.img}
-                alt="span"
-                style={{ height: 200 }}
-              />
-              <div style={{marginBottom: 4}}>
-                <Typography variant="h6" gutterBottom >
-                  {item?.name}
-                </Typography>
-                <Typography variant="subtitle" >
-                  Lorem ipsum is placeholder 
-                </Typography>
-              </div>
-              <div style={{display: 'flex', justifyContent:"space-between"}}>
-                <div />
-                <IconButton
-                  size="small"
-                  style={{ backgroundColor: "#006cff", color: 'white' }}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    addPokemonToCart(item)
-                  }}
-                >
-                  <AddIcon />
-                </IconButton>
-              </div>
-            </Card>
+            <PokemonCard
+              key={index}
+              id={item?.id}
+              name={item?.name}
+              img={item?.img}
+              index={index}
+              onClick={() => addPokemonToCart(item)}
+            />
           );
         })}
       </div>

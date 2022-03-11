@@ -1,12 +1,13 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import PokemonCard from "../../components/cards";
 import usePokemon from "../../hooks/usePokemon";
 import { getPokemonByName } from "../../services/axios";
 
 function Pokemons() {
   const params = useParams();
-  const { addPokemonToCart } = usePokemon;
+  const { addPokemonToCart, pokemonCarts } = usePokemon();
   const [pokemonData, setPokemon] = useState(null);
 
   useEffect(() => {
@@ -32,46 +33,74 @@ function Pokemons() {
   };
 
   return (
-    <Grid
-      container
-      style={{
-        marginTop: 60,
-        backgroundColor: "#fff",
-        padding: 20,
-        borderRadius: 20
-      }}
-    >
-      <Grid item xs={12} md={5}>
-        <img src={pokemonData?.img} alt="thumbnail" style={{ width: "100%" }} />
-      </Grid>
+    <>
       <Grid
-        item
-        xs={12}
-        md={7}
-        justifyContent="center"
-        display={"flex"}
-        direction="column"
-        style={{ padding: 40 }}
+        container
+        style={{
+          marginTop: 60,
+          backgroundColor: "#fff",
+          padding: 40,
+          paddingTop: 20,
+          paddingBottom: 20,
+          borderRadius: 10,
+          alignItems: "center",
+        }}
       >
-        <Typography variant="h3">{pokemonData?.name}</Typography>
-        <Typography variant="h6">Moves</Typography>
-        <div style={{ display: "flex", flexWrap: "wrap", marginBottom: 20 }}>
-          {Array.from(pokemonData?.moves || []).map((item) => {
-            return <span style={{ marginRight: 6 }}>{item?.move?.name}</span>;
-          })}
-        </div>
-        <Button
-          variant="contained"
-          color="secondary"
-          disableElevation
-          size="large"
-          style={{ borderRadius: 12 }}
-          onClick={() => addPokemonToCart(pokemonData)}
+        <Grid item xs={12} md={5}>
+          <img
+            src={pokemonData?.img}
+            alt="thumbnail"
+            style={{ width: "100%" }}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={7}
+          justifyContent="center"
+          display={"flex"}
+          direction="column"
+          style={{ padding: 40 }}
         >
-          Add to my pokemon
-        </Button>
+          <Typography variant="h3">{pokemonData?.name}</Typography>
+          <Typography variant="h6">Moves</Typography>
+          <div style={{ display: "flex", flexWrap: "wrap", marginBottom: 20 }}>
+            {Array.from(pokemonData?.moves || [])
+              .slice(0, 30)
+              .map((item) => {
+                return (
+                  <span style={{ marginRight: 6 }}>{item?.move?.name}</span>
+                );
+              })}
+          </div>
+          <Button
+            variant="contained"
+            color="secondary"
+            disableElevation
+            size="large"
+            style={{ borderRadius: 12 }}
+            onClick={() => addPokemonToCart(pokemonData)}
+          >
+            Add to my pokemon
+          </Button>
+        </Grid>
       </Grid>
-    </Grid>
+      <h1>More Pokemons</h1>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {Array.from(pokemonCarts || []).map((item, index) => {
+          return (
+            <PokemonCard
+              key={index}
+              id={item?.id}
+              name={item?.name}
+              img={item?.img}
+              index={index}
+              onClick={() => addPokemonToCart(item)}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }
 
