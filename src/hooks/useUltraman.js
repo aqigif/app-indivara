@@ -6,14 +6,14 @@ import { useSMState, useSMUpdater } from "./useSM";
     
     const addPokemonToCart = (data) => {
         dispatch({
-            type: "ADD_POKEMON_TO_CART",
+            type: "ADD_DIGIMON_TO_CART",
             data
         })
     }
 
     const deletePokemonFromCart = (index) => {
       dispatch({
-          type: "DELETE_POKEMON_FROM_CART",
+          type: "DELETE_DIGIMON_FROM_CART",
           index: index
       })
     }
@@ -21,14 +21,16 @@ import { useSMState, useSMUpdater } from "./useSM";
     return { pokemonCarts: state?.pokemonCarts, addPokemonToCart, deletePokemonFromCart };
   };
   
-export const switcherPokemons = (state, action) => {
+  export default usePokemon;
+  
+export const switcherDigimons = (state, action) => {
   switch (action.type) {
-    case "ADD_POKEMON_TO_CART":
+    case "ADD_DIGIMON_TO_CART":
       return {
         ...state,
         pokemonCarts:[...state.pokemonCarts, action.data],
       };
-    case "DELETE_POKEMON_FROM_CART":
+    case "DELETE_DIGIMON_FROM_CART":
       return {
         ...state,
         pokemonCarts: state.pokemonCarts.filter((item, index) => index !== action.index)
@@ -37,5 +39,3 @@ export const switcherPokemons = (state, action) => {
       return state;
   }
 };
-  export default usePokemon;
-  

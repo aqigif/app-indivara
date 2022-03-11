@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import usePokemon from "../../hooks/usePokemon";
 
 function Pokemons() {
-const navigate = useNavigate()
-const { pokemonCarts } = usePokemon();
+  const navigate = useNavigate();
+  const { pokemonCarts, deletePokemonFromCart } = usePokemon();
 
   return (
     <div className="App">
@@ -12,7 +12,6 @@ const { pokemonCarts } = usePokemon();
         {Array.from(pokemonCarts || []).map((item, index) => {
           return (
             <span
-              onClick={() => navigate(`/pokemons/${item.id}?name=${item.name}`)}
               style={{
                 margin: 14,
                 marginBottom: 30,
@@ -23,6 +22,9 @@ const { pokemonCarts } = usePokemon();
               }}
             >
               <img
+                onClick={() =>
+                  navigate(`/pokemons/${item.id}?name=${item.name}`)
+                }
                 src={item?.img}
                 alt="span"
                 style={{ height: 200 }}
@@ -30,7 +32,9 @@ const { pokemonCarts } = usePokemon();
               <p key={item.id} style={{ color: "white" }}>
                 {item?.name}
               </p>
-              <button>add to cart</button>
+              <button onClick={() => deletePokemonFromCart(index)}>
+                remove from cart
+              </button>
             </span>
           );
         })}

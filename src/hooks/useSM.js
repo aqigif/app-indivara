@@ -1,26 +1,23 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { switcherPokemons } from "./usePokemon";
 
 const SMStateContext = createContext();
 const SMUpdaterContext = createContext();
 
-const switcer = (state, action) => {
-  switch (action.type) {
-    case "ADD_POKEMON_TO_CART":
-      return {
-        ...state,
-        pokemonCarts:[...state.pokemonCarts, action.data],
-      };
-    case "PERSIST":
-      return {
-        ...state,
-        ...action.data,
-      };
-    default:
-      return state;
+const switcher = (state, action) => {
+  const dataPokemon = switcherPokemons(state, action)
+  const dataDigimon = switcherPokemons(state, action)
+  let states = {...dataPokemon, dataDigimon}
+  if (action.type === "PERSIST") {
+    states = {
+      ...state,
+      ...action.data
+    }
   }
+  return states
 };
 const reducer = (state, action) => {
-  const data = switcer(state, action);
+  const data = switcher(state, action);
   const persistData = { pokemonCarts: data.pokemonCarts };
   localStorage.setItem("persistData", JSON.stringify(persistData));
   return data;
