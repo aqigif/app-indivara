@@ -1,12 +1,21 @@
+import { Button, TextField } from "@mui/material";
 
 function FooterAction({ todoIndex, value, setValue, handleAdd, handleUpdate }) {
   return (
     <>
-      <input value={value} onChange={(e) => setValue(e.target.value)} />
+      <TextField
+        size="small"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
       {todoIndex === null ? (
-        <button onClick={handleAdd}>add</button>
+        <Button variant="contained" disableElevation onClick={handleAdd}>
+          add
+        </Button>
       ) : (
-        <button onClick={handleUpdate}>update</button>
+        <Button color="secondary" variant="contained" disableElevation onClick={handleUpdate}>
+          update
+        </Button>
       )}
     </>
   );

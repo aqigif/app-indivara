@@ -1,3 +1,5 @@
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Card, IconButton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import usePokemon from "../../hooks/usePokemon";
 
@@ -11,11 +13,11 @@ function Pokemons() {
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {Array.from(pokemonCarts || []).map((item, index) => {
           return (
-            <span
+            <Card
               style={{
                 margin: 14,
                 marginBottom: 30,
-                background: "gray",
+                background: "white",
                 padding: 10,
                 borderRadius: 10,
                 cursor: "pointer",
@@ -29,13 +31,19 @@ function Pokemons() {
                 alt="span"
                 style={{ height: 200 }}
               />
-              <p key={item.id} style={{ color: "white" }}>
+              <Typography variant="h6" gutterBottom >
                 {item?.name}
-              </p>
-              <button onClick={() => deletePokemonFromCart(index)}>
-                remove from cart
-              </button>
-            </span>
+              </Typography>
+              <IconButton
+                style={{ backgroundColor: "red", color: 'white' }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  deletePokemonFromCart(index)
+                }}
+              >
+                <RemoveIcon />
+              </IconButton>
+            </Card>
           );
         })}
       </div>

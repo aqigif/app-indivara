@@ -7,20 +7,35 @@ import Users from "./pages/Users";
 import Pokemons from "./pages/Pokemons/Pokemons";
 import PokemonId from "./pages/Pokemons/PokemonId";
 import PokemonsCart from "./pages/Pokemons/PokemonsCart";
+import Header from "./components/header";
+import { Container } from "@mui/material";
 
-
-
+const sections = [
+  {
+    title: "Todo",
+    url: "/",
+  },
+  {
+    title: "Users",
+    url: "/users",
+  },
+  {
+    title: "Peoples",
+    url: "/peoples",
+  },
+  {
+    title: "Pokemons",
+    url: "/pokemons",
+  },
+  {
+    title: "My Pokemons",
+    url: "/pokemons/cart",
+  },
+];
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to Indivara JDT 9!</h1>
-      <div style={{display: 'flex', justifyContent: 'space-between', maxWidth: 600}}>
-        <Link to={"/"}>Todo</Link>
-        <Link to={"/users"}>Users</Link>
-        <Link to={"/peoples"}>Peoples</Link>
-        <Link to={"/pokemons"}>Pokemons</Link>
-        <Link to={"/pokemons/cart"}>My Pokemons</Link>
-      </div>
+    <Container>
+      <Header title="Indivara App" sections={sections} />
       <Routes>
         <Route path="/" element={<Todo />} />
         <Route path="users" element={<Users />} />
@@ -29,8 +44,8 @@ function App() {
         <Route path="pokemons/:id" element={<PokemonId />} />
         <Route path="pokemons/cart" element={<PokemonsCart />} />
       </Routes>
-    </div>
+    </Container>
   );
 }
 
-export default App
+export default App;

@@ -1,3 +1,5 @@
+import { Card, IconButton, Typography } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import usePokemon from "../../hooks/usePokemon";
@@ -41,36 +43,37 @@ function Pokemons() {
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {Array.from(pokemonData || []).map((item, index) => {
           return (
-            <span
+            <Card
               style={{
                 margin: 14,
                 marginBottom: 30,
-                background: "gray",
+                background: "white",
                 padding: 10,
                 borderRadius: 10,
                 cursor: "pointer",
               }}
             >
               <img
-                src={item?.img}
-                alt="span"
-                style={{ height: 200 }}
                 onClick={() =>
                   navigate(`/pokemons/${item.id}?name=${item.name}`)
                 }
+                src={item?.img}
+                alt="span"
+                style={{ height: 200 }}
               />
-              <p key={item.id} style={{ color: "white" }}>
+              <Typography variant="h6" gutterBottom >
                 {item?.name}
-              </p>
-              <button
+              </Typography>
+              <IconButton
+                style={{ backgroundColor: "blue", color: 'white' }}
                 onClick={(e) => {
-                  e.preventDefault();
-                  addPokemonToCart(item);
+                  e.preventDefault()
+                  addPokemonToCart(index)
                 }}
               >
-                add to cart
-              </button>
-            </span>
+                <AddIcon />
+              </IconButton>
+            </Card>
           );
         })}
       </div>
