@@ -16,6 +16,8 @@ function Pokemons() {
             <Card
               style={{
                 margin: 14,
+                marginLeft: 0,
+                marginRight: 28,
                 marginBottom: 30,
                 background: "white",
                 padding: 10,
@@ -34,15 +36,19 @@ function Pokemons() {
               <Typography variant="h6" gutterBottom >
                 {item?.name}
               </Typography>
-              <IconButton
-                style={{ backgroundColor: "red", color: 'white' }}
-                onClick={(e) => {
-                  e.preventDefault()
-                  deletePokemonFromCart(index)
-                }}
-              >
-                <RemoveIcon />
-              </IconButton>
+              <div style={{display: 'flex', justifyContent:"space-between"}}>
+                <div />
+                <IconButton
+                  size="small"
+                  style={{ backgroundColor: "#fd1d1d", color: 'white' }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    deletePokemonFromCart(index)
+                  }}
+                >
+                  <RemoveIcon />
+                </IconButton>
+              </div>
             </Card>
           );
         })}

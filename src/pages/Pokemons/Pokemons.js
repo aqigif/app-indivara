@@ -22,6 +22,7 @@ function Pokemons() {
         async (item) => {
           const payloadDetail = await getPokemonByName(item?.name || "");
           return {
+            ...payloadDetail.data,
             id: payloadDetail?.data?.name || "",
             name: payloadDetail?.data?.name || "",
             img:
@@ -46,6 +47,8 @@ function Pokemons() {
             <Card
               style={{
                 margin: 14,
+                marginLeft: 0,
+                marginRight: 28,
                 marginBottom: 30,
                 background: "white",
                 padding: 10,
@@ -61,18 +64,27 @@ function Pokemons() {
                 alt="span"
                 style={{ height: 200 }}
               />
-              <Typography variant="h6" gutterBottom >
-                {item?.name}
-              </Typography>
-              <IconButton
-                style={{ backgroundColor: "blue", color: 'white' }}
-                onClick={(e) => {
-                  e.preventDefault()
-                  addPokemonToCart(item)
-                }}
-              >
-                <AddIcon />
-              </IconButton>
+              <div style={{marginBottom: 4}}>
+                <Typography variant="h6" gutterBottom >
+                  {item?.name}
+                </Typography>
+                <Typography variant="subtitle" >
+                  Lorem ipsum is placeholder 
+                </Typography>
+              </div>
+              <div style={{display: 'flex', justifyContent:"space-between"}}>
+                <div />
+                <IconButton
+                  size="small"
+                  style={{ backgroundColor: "#006cff", color: 'white' }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    addPokemonToCart(item)
+                  }}
+                >
+                  <AddIcon />
+                </IconButton>
+              </div>
             </Card>
           );
         })}
