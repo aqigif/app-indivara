@@ -1,14 +1,11 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import reducer from "./reducers";
+import reducer, { initialReducerState } from "./reducers";
 
 const SMStateContext = createContext();
 const SMUpdaterContext = createContext();
 
 export const StateProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    pokemonCarts: [],
-    token: null,
-  });
+  const [state, dispatch] = useReducer(reducer, initialReducerState);
 
   useEffect(() => {
     const data = localStorage.getItem("persistData");
@@ -27,5 +24,4 @@ export const StateProvider = ({ children }) => {
 };
 
 export const useSMState = () => useContext(SMStateContext);
-
 export const useSMUpdater = () => useContext(SMUpdaterContext);

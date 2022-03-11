@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { serviceLogin } from "../services/auth";
 import { useSMState, useSMUpdater } from "./useSM";
 
-const useAuth = (params) => {
+const useAuth = (param) => {
   const navigate = useNavigate();
   const dispatch = useSMUpdater();
   const state = useSMState();
 
   useEffect(() => {
-    if (!state?.token && params === "protected") {
+    if (!state?.token && param === "protected") {
       navigate("/login");
     }
-    if (state?.token && params === "no-auth-only") {
+    if (state?.token && param === "no-auth-only") {
       navigate("/pokemons/cart");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params, state]);
+  }, [param, state]);
 
   const doLogin = async ({ email, password }) => {
     try {

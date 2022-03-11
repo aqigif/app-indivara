@@ -37,7 +37,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 export default function Login() {
   const { doLogin } = useAuth("no-auth-only");
+
   const navigate = useNavigate();
+  
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState(""); // to store error message
 

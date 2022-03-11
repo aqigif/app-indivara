@@ -61,6 +61,11 @@ const persitingData = (state, action) => {
   return states;
 };
 
+export const initialReducerState = {
+  pokemonCarts: [],
+  token: null,
+}
+
 const reducer = (state, action) => {
   const reducers = combineReducers(state, action);
   const persistData = persitingData(state, action);

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import usePokemon from "../../hooks/usePokemon";
 
-function Pokemons() {
+function PokemonsCart() {
   const navigate = useNavigate();
   const { pokemonCarts, deletePokemonFromCart } = usePokemon();
   useAuth("protected");
@@ -60,4 +60,4 @@ function Pokemons() {
   );
 }
 
-export default Pokemons;
+export default PokemonsCart;
