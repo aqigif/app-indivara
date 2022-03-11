@@ -1,14 +1,10 @@
-import { Card, IconButton, Typography } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import PokemonCard from "../../components/cards";
 import usePokemon from "../../hooks/usePokemon";
 import { getPokemonByName, getPokemons } from "../../services/axios";
-import PokemonCard from "../../components/cards";
 
 function Pokemons() {
   const { addPokemonToCart } = usePokemon();
-  const navigate = useNavigate();
   const [pokemonData, setPokemons] = useState([]);
 
   useEffect(() => {
