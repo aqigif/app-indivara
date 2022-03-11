@@ -37,8 +37,7 @@ function Pokemons() {
       style={{
         marginTop: 60,
         backgroundColor: "#fff",
-        paddingTop: 20,
-        paddingBottom: 20,
+        padding: 20,
         borderRadius: 20
       }}
     >
