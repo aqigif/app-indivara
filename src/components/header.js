@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 function Header(props) {
-  const { sections, title } = props;
+  const { menus, title } = props;
   const { doLogout } = useAuth();
 
   return (
@@ -24,7 +24,7 @@ function Header(props) {
         >
           {title}
         </Typography>
-        {sections.map((section) => (
+        {menus.map((section) => (
           <Link
             to={section.url}
             key={section.title}

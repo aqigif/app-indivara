@@ -1,7 +1,7 @@
 import {
   useEffect, useState
 } from "react";
-import { getUsers } from "../services/axios";
+import { getUsers } from "../services/users";
 import { useSMUpdater } from "./useSM";
 
 const useUser = () => {

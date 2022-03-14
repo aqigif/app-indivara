@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PokemonCard from "../../components/cards";
 import usePokemon from "../../hooks/usePokemon";
-import { getPokemonByName, getPokemons } from "../../services/axios";
+import { getPokemonByName, getPokemons } from "../../services/pokemons";
 
 function Pokemons() {
   const { addPokemonToCart } = usePokemon();

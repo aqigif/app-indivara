@@ -1,6 +1,6 @@
-import axios from "axios";
+import { client } from "./axios";
 
-export const serviceLogin = (data) => axios({
+export const serviceLogin = (data) => client({
   method: "POST",
   baseURL: "https://reqres.in",
   url: "/api/login",

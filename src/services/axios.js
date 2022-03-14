@@ -1,20 +1,27 @@
 import axios from "axios";
 const baseURL = "https://pokeapi.co/api/v2"
 
-export const getUsers = () => axios({
-  method: "GET",
-  baseURL: "https://reqres.in",
-  url: "/api/users?page=2",
+export const client = axios.create({
+  baseURL
+})
+
+client.interceptors.request.use((config) => {
+  const data = localStorage.getItem("persistData");
+  const token = JSON.parse(data)?.token
+  if (token) {
+    config.headers = {
+      Authorization: "Bearer " + token,
+      ...config.headers,
+    };
+  }
+  return config;
 });
 
-export const getPokemons = () => axios({
-  method: "GET",
-  baseURL,
-  url: "/pokemon",
-});
-
-export const getPokemonByName = (name) => axios({
-  method: "GET",
-  baseURL,
-  url: `/pokemon/${name}`,
-});
+client.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    return error
+  }
+);
