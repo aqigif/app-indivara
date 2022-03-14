@@ -59,7 +59,7 @@ const routesData = [
 function App() {
   const { token } = useAuth();
   const routes = routesData.filter((item) => item.isProtected ? Boolean(token) : true)
-  const menus = routes.filter((item) => item.isMenu && (item.isProtected ? Boolean(token) : true))
+  const menus = routes.filter((item) => item.isMenu)
 
   return (
     <Container>
