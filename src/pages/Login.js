@@ -13,6 +13,8 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import MuiAlert from '@mui/material/Alert';
+import { useFormik } from "formik";
+import * as yup from 'yup';
 
 function Copyright(props) {
   return (
@@ -43,13 +45,25 @@ export default function Login() {
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState(""); // to store error message
 
-  const handleSubmit = async (event) => {
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ""
+    },
+    validationSchema: yup.object({
+      email: yup.string().email("Format email tidak sesuai").required("Email wajib diisi"),
+      password:  yup.string().min(6, "Password minimal 6 karakter").required("Password wajib diisi")
+    }),
+    onSubmit: values => {
+      handleSubmit(values)
+    },
+  });
+
+  const handleSubmit = async (values) => {
     setLoading(true);
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
     const payload = await doLogin({
-      email: data.get("email"),
-      password: data.get("password"),
+      email: values.email,
+      password: values.password,
     });
 
     if (payload?.token) {
@@ -76,7 +90,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -86,6 +100,11 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={formik.values.email}
+            onChange={formik.handleChange("email")}
+            onBlur={formik.handleBlur("email")}
+            error={formik.touched.email && formik.errors.email}
+            helperText={formik.touched.email && formik.errors.email}
           />
           <TextField
             margin="normal"
@@ -96,6 +115,11 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={formik.values.password}
+            onChange={formik.handleChange("password")}
+            onBlur={formik.handleBlur("password")}
+            error={formik.touched.email && formik.errors.password}
+            helperText={formik.touched.email && formik.errors.password}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
