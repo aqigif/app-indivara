@@ -2,13 +2,13 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { Card, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+// import useAuth from "../../hooks/useAuth";
 import usePokemon from "../../hooks/usePokemon";
 
 function PokemonsCart() {
   const navigate = useNavigate();
   const { pokemonCarts, deletePokemonFromCart } = usePokemon();
-  useAuth("protected");
+  // useAuth("protected");
 
   return (
     <div className="App">

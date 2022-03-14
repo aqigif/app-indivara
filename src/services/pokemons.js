@@ -1,14 +1,11 @@
-import axios from "axios";
-const baseURL = process.env.REACT_APP_API_URL
+import { client } from "./axios";
 
-export const getPokemons = () => axios({
+export const getPokemons = () => client({
   method: "GET",
-  baseURL,
   url: "/pokemon",
 });
 
-export const getPokemonByName = (name) => axios({
+export const getPokemonByName = (name) => client({
   method: "GET",
-  baseURL,
   url: `/pokemon/${name}`,
 });

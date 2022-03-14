@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PokemonCard from "../../components/cards";
 import usePokemon from "../../hooks/usePokemon";
-import { getPokemonByName } from "../../services/axios";
+import { getPokemonByName } from "../../services/pokemons";
 
 function Pokemons() {
   const params = useParams();

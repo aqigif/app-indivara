@@ -10,41 +10,66 @@ import PokemonsCart from "./pages/Pokemons/PokemonsCart";
 import Login from "./pages/Login";
 import Header from "./components/header";
 import { Container } from "@mui/material";
+import useAuth from "./hooks/useAuth";
 
-const sections = [
+const routesData = [
   {
     title: "Todo",
     url: "/",
+    isMenu: true,
+    component: <Todo />
   },
   {
     title: "Users",
     url: "/users",
+    isMenu: true,
+    component: <Users />
   },
   {
     title: "Peoples",
     url: "/peoples",
+    isMenu: true,
+    component: <Peoples />
   },
   {
     title: "Pokemons",
     url: "/pokemons",
+    isMenu: true,
+    isProtected: true,
+    component: <Pokemons />
   },
   {
     title: "My Pokemons",
     url: "/pokemons/cart",
+    isMenu: true,
+    isProtected: true,
+    component: <PokemonsCart />
+  },
+  {
+    title: "Pokemon Detail",
+    url: "/pokemons/:id",
+    component: <PokemonId />
+  },
+  {
+    title: "Login",
+    url: "/login",
+    component: <Login />
   },
 ];
 function App() {
+  const { token } = useAuth();
+  const routes = routesData.filter((item) => item.isProtected ? Boolean(token) : true)
+  const menus = routes.filter((item) => item.isMenu && (item.isProtected ? Boolean(token) : true))
+
   return (
     <Container>
-      <Header title="Indivara App" sections={sections} />
+      <Header title="Indivara App" menus={menus} />
       <Routes>
-        <Route path="/" element={<Todo />} />
-        <Route path="users" element={<Users />} />
-        <Route path="peoples" element={<Peoples />} />
-        <Route path="pokemons" element={<Pokemons />} />
-        <Route path="pokemons/:id" element={<PokemonId />} />
-        <Route path="pokemons/cart" element={<PokemonsCart />} />
-        <Route path="login" element={<Login />} />
+        {routes.map((item) => {
+          return (
+            <Route key={item.url} path={item.url} element={item.component} />
+          )
+        })}
       </Routes>
     </Container>
   );
